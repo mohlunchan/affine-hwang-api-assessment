@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express'
 import { v4 as uuidv4 } from 'uuid'
-import { body, validationResult, param } from 'express-validator'
+import { body, validationResult } from 'express-validator'
 
 interface Customer {
   uuid: string,
