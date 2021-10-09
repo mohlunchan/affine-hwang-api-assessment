@@ -19,7 +19,7 @@ export const getCustomer = (uuid: string) => {
     })
 }
 
-export const getCustomersFromDatabase = () => {
+export const getCustomers = () => {
     return new Promise<Customer[]>(resolve => {
         setTimeout(() => {
             return resolve(CustomersModel)
@@ -27,7 +27,7 @@ export const getCustomersFromDatabase = () => {
     })
 }
 
-export const createCustomerToDatabase = (data: Omit<Customer, "uuid">) => {
+export const createCustomer = (data: Omit<Customer, "uuid">) => {
     return new Promise<string>(resolve => {
         setTimeout(() => {
             const uuid = uuidv4()

@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import { validationResult } from 'express-validator'
 import { createNewCustomerValidator, updateCustomerValidator } from './validators'
-import { getCustomersFromDatabase, createCustomerToDatabase, updateCustomer, getCustomer, deleteCustomer } from './model'
+import { getCustomers, createCustomer, updateCustomer, getCustomer, deleteCustomer } from './model'
 
 const router = express.Router()
 
@@ -61,7 +61,7 @@ router.post('/',
 
         const { name, email, address } = req.body
 
-        const uuid = await createCustomerToDatabase({
+        const uuid = await createCustomer({
             name,
             email,
             address,
@@ -75,7 +75,7 @@ router.post('/',
 
 /* Get customers listing. */
 router.get('/', async (req: Request, res: Response) => {
-    const customers = await getCustomersFromDatabase();
+    const customers = await getCustomers();
     return res.json(customers)
 })
 
