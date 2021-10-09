@@ -27,6 +27,11 @@ app.use((err: HttpException, req: Request, res: Response, next: NextFunction) =>
   });
 });
 
+//handle 404 exceptions
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  res.status(404).send("Sorry can't find that!")
+})
+
 app.listen(port, () => {
   logger.info(`Service started on port ${port}`)
 })
