@@ -1,21 +1,24 @@
 import express, { Application, NextFunction, Request, Response } from 'express'
+import { json, urlencoded } from 'body-parser';
 import HttpException from './exceptions/exceptions';
-import customersRouter from './routes/customers'
+import CustomerRoutes from './module/customers/routes'
 import pino from 'pino';
 
 const logger = pino()
 const app: Application = express();
 const port = 3000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// parse application/x-www-form-urlencoded
+app.use(urlencoded({ extended: false }))
+// parse application/json
+app.use(json())
 
 // logging middleware
-app.use((req: express.Request, res: express.Response, next: NextFunction) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   logger.info(`${req.method} ${req.path}`)
   next();
 })
-app.use('/customers', customersRouter);
+app.use('/customers', CustomerRoutes);
 
 // error handler
 app.use((err: HttpException, req: Request, res: Response, next: NextFunction) => {
