@@ -75,7 +75,7 @@ router.post('/',
 
 /* Get customers listing. */
 router.get('/', async (req: Request, res: Response) => {
-    const customers = await getCustomers();
+    const customers = await getCustomers(req.query.page && Number(req.query.page) || 1, req.query.size && Number(req.query.size) || 10);
     return res.json(customers)
 })
 

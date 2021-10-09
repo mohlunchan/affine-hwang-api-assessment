@@ -19,10 +19,13 @@ export const getCustomer = (uuid: string) => {
     })
 }
 
-export const getCustomers = () => {
-    return new Promise<Customer[]>(resolve => {
+export const getCustomers = (page?: number, size?: number) => {
+    return new Promise<{ total: number, data: Customer[] }>(resolve => {
         setTimeout(() => {
-            return resolve(CustomersModel)
+            return resolve({
+                total: CustomersModel.length,
+                data: page && size ? CustomersModel.slice((page - 1) * size, page * size) : CustomersModel,
+            })
         }, delay)
     })
 }
